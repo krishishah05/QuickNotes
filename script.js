@@ -11,6 +11,7 @@ function addNote() {
     note.classList.add('note');
 
     const contentEditable = document.createElement('div');
+    contentEditable.classList.add('note-content'); // Add class for styling
     contentEditable.setAttribute('contenteditable', 'true');
     contentEditable.innerText = 'Click to edit...';
     contentEditable.addEventListener('focus', function() {
