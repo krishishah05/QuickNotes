@@ -7,6 +7,9 @@ const notesContainer = document.getElementById('notesContainer');
 addNoteBtn.addEventListener('click', addNote);
 clearAllBtn.addEventListener('click', clearAllNotes);
 
+// Load notes when the page loads
+window.onload = loadNotes;
+
 // Function to add a new note
 function addNote() {
     const note = document.createElement('div');
@@ -15,7 +18,7 @@ function addNote() {
     const contentEditable = document.createElement('div');
     contentEditable.classList.add('note-content');
     contentEditable.setAttribute('contenteditable', 'true');
-    contentEditable.innerText = 'Click here to edit...';
+    contentEditable.innerText = 'Click to edit...';
     contentEditable.addEventListener('focus', function() {
         if (this.innerText === 'Click to edit...') {
             this.innerText = '';
@@ -113,10 +116,10 @@ function loadNotes() {
 // Function to get formatted timestamp
 function getFormattedTimestamp() {
     const now = new Date();
-    const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-    const time = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-    return `${date} ${time}`;
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const meridiem = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    return `${formattedHours}:${formattedMinutes} ${meridiem}`;
 }
-
-// Load notes when the page loads
-window.onload = loadNotes;
